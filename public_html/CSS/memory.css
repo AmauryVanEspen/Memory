@@ -16,3 +16,7 @@ body{
 table{
     margin: auto;
 }
+
+table input{
+    width: 40px;
+}
