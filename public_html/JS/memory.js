@@ -57,7 +57,7 @@ var randomCoulTab = function (nombre) {
     var bleu = 80;
     for (var i = 0; i < nombre / 2; i++) {
         if (i % 6 == 0 && i != 0) {
-            rouge += 100;
+            rouge += 110;
             vert = 20;
             bleu = 80;
         } else if (i % 2 == 0 && i != 0) {
