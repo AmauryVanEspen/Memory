@@ -4,15 +4,15 @@
  * and open the template in the editor.
  */
 
-var elem1, elem2;
-var n;
+var elem1, elem2;//les inputs cliqué
+var n;//le nombre de tours
 //fonction pour initialiser le tableau
 var start = function () {
-    /////demande nombre d'éléments
     var nbCase;
     n = 0;
     elem1 = undefined;
     elem2 = undefined;
+    /////demande nombre d'éléments
     do {
         nbCase = prompt("Veuillez entrer un nombre de lignes (entre 1 et 5)");
     } while (nbCase < 1 || nbCase > 5);
@@ -55,8 +55,8 @@ var randomCoulTab = function (nombre) {
     var tableau = [];
 
     var rouge = 20;
-    var bleu = 80;
     var vert = 20;
+    var bleu = 80;
     for (var i = 0; i < nombre / 2; i++) {
         if (i % 6 == 0 && i != 0) {
             rouge += 100;
@@ -96,8 +96,8 @@ var clickElem = function (event) {
             $(elem1).off();
             $(elem2).off();
         } else {
-            $(elem1).css("background-color", "initial");
-            $(elem2).css("background-color", "initial");
+            $(elem1).css("background-color", "");
+            $(elem2).css("background-color", "");
         }
         elem1 = event.target;
         elem2 = undefined;
