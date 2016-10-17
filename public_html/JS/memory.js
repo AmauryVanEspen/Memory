@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 var elem1, elem2;//les inputs cliqué
 var n;//le nombre de tours
 //fonction pour initialiser le tableau
@@ -53,7 +52,6 @@ var restart = function () {
 
 var randomCoulTab = function (nombre) {
     var tableau = [];
-
     var rouge = 20;
     var vert = 20;
     var bleu = 80;
@@ -68,15 +66,12 @@ var randomCoulTab = function (nombre) {
         } else if (i != 0) {
             bleu += 100;
         }
-
         var tmp = "#" + rouge.toString(16) + vert.toString(16) + bleu.toString(16);
         tableau.push(tmp);
         tableau.push(tmp);
     }
     return tableau;
 }
-
-
 
 var clickElem = function (event) {
     if (elem1 == undefined) {
