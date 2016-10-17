@@ -51,28 +51,6 @@ var restart = function () {
     start();
 };
 
-var randomCouleur = function () {
-    res = "#";
-    var tmp = Math.floor(Math.random() * 256).toString(16);
-
-    if (tmp.length == 1) {
-        res += 0;
-    }
-    res += tmp;
-    tmp = Math.floor(Math.random() * 256).toString(16);
-    if (tmp.length == 1) {
-        res += 0;
-    }
-    res += tmp;
-    tmp = Math.floor(Math.random() * 256).toString(16);
-    if (tmp.length == 1) {
-        res += 0;
-    }
-    res += tmp;
-
-    return res;
-};
-
 var randomCoulTab = function (nombre) {
     var tableau = [];
 
@@ -140,3 +118,25 @@ var clickElem = function (event) {
 $(document).ready(function () {
     $('#start').on("click", start);
 });
+
+var randomCouleur = function () {
+    res = "#";
+    var tmp = Math.floor(Math.random() * 256).toString(16);
+
+    if (tmp.length == 1) {
+        res += 0;
+    }
+    res += tmp;
+    tmp = Math.floor(Math.random() * 256).toString(16);
+    if (tmp.length == 1) {
+        res += 0;
+    }
+    res += tmp;
+    tmp = Math.floor(Math.random() * 256).toString(16);
+    if (tmp.length == 1) {
+        res += 0;
+    }
+    res += tmp;
+
+    return res;
+};
