@@ -14,8 +14,8 @@ var start = function () {
     elem1 = undefined;
     elem2 = undefined;
     do {
-        nbCase = prompt("Veuillez entrer un nombre de case (pair)");
-    } while (nbCase % 2 != 0 || nbCase < 1);
+        nbCase = prompt("Veuillez entrer un nombre de lignes (entre 1 et 5)");
+    } while (nbCase < 1 || nbCase > 5);
     ////Utilisation d'un bouton restart
     if ($('#restart').length == 0) {
         $('#menu').append("<input type='button' value='Restart' id='restart'/>");
@@ -24,24 +24,23 @@ var start = function () {
     }
     $('#leJeu').append("<table></table>");
     ////Gestion des couleurs randoms
-    var randomElem = [];
-    for (var i = 0; i < nbCase/2; i++) {
-        var coul = randomCouleur();
-        randomElem.push(coul);
-        randomElem.push(coul);
-    }
+    var randomElem = randomCoulTab(nbCase * 6);
+    //double tri aléatoire
     randomElem.sort(function (a, b) {
         return [-1, 1].indexOf(Math.floor(Math.random() * 2));
-    })
+    });
+    randomElem.sort(function (a, b) {
+        return [-1, 1].indexOf(Math.floor(Math.random() * 2));
+    });
     ////afichage du tableau
     var i = 0;
-    while (i < nbCase) {
+    while (i < nbCase * 6) {
         var ligne = "<tr>";
-        for (j = i; (j < (i + 5)) && (j < nbCase); j++) {
+        for (j = i; (j < (i + 6)) && (j < nbCase * 6); j++) {
             ligne += "<td><input type='button' class='div' valeur='" + randomElem.pop() + "'/></td>";
         }
         $('table').append(ligne + "</tr>");
-        i += 5;
+        i += 6;
     }
     ///dynamisation des nouveaux input
     $('.div').on("click", clickElem);
@@ -55,40 +54,69 @@ var restart = function () {
 var randomCouleur = function () {
     res = "#";
     var tmp = Math.floor(Math.random() * 256).toString(16);
-    
-    if (tmp.length == 1){
+
+    if (tmp.length == 1) {
         res += 0;
     }
     res += tmp;
     tmp = Math.floor(Math.random() * 256).toString(16);
-    if (tmp.length == 1){
+    if (tmp.length == 1) {
         res += 0;
     }
     res += tmp;
     tmp = Math.floor(Math.random() * 256).toString(16);
-    if (tmp.length == 1){
+    if (tmp.length == 1) {
         res += 0;
     }
     res += tmp;
-    
+
     return res;
 };
 
+var randomCoulTab = function (nombre) {
+    var tableau = [];
+
+    var rouge = 20;
+    var bleu = 80;
+    var vert = 20;
+    for (var i = 0; i < nombre / 2; i++) {
+        if (i % 6 == 0 && i != 0) {
+            rouge += 100;
+            vert = 20;
+            bleu = 80;
+        } else if (i % 2 == 0 && i != 0) {
+            vert += 100;
+            bleu = 80;
+        } else if (i != 0) {
+            bleu += 100;
+        }
+
+        var tmp = "#" + rouge.toString(16) + vert.toString(16) + bleu.toString(16);
+        tableau.push(tmp);
+        tableau.push(tmp);
+    }
+    return tableau;
+}
+
+
+
 var clickElem = function (event) {
     if (elem1 == undefined) {
-//afficher l'élément
+        //afficher l'élément
         elem1 = event.target;
         $(elem1).css("background-color", $(elem1).attr("valeur"));
     } else if (elem2 == undefined) {
-//afficher l'élément
-        elem2 = event.target;
-        $(elem2).css("background-color", $(elem2).attr("valeur"));
-        n++;
+        //afficher l'élément
+        if (event.target != elem1) {
+            elem2 = event.target;
+            $(elem2).css("background-color", $(elem2).attr("valeur"));
+            n++;
+        }
     } else {
-//désafficher les éléments et affecter le nouveau
+        //désafficher les éléments et affecter le nouveau
         if ($(elem1).attr("valeur") == $(elem2).attr("valeur")) {
-            $(elem1).toggle();
-            $(elem2).toggle();
+            $(elem1).off();
+            $(elem2).off();
         } else {
             $(elem1).css("background-color", "initial");
             $(elem2).css("background-color", "initial");
@@ -100,7 +128,7 @@ var clickElem = function (event) {
 
     var fini = true;
     $('.div').each(function () {
-        if ($(this).css("display") == "inline") {
+        if ($(this).css("background-color") == "transparent" || $(this).css("background-color") == "rgb(240, 240, 240)") {
             fini = false;
         }
     });
@@ -108,6 +136,7 @@ var clickElem = function (event) {
         alert("GG ! Réussi en " + n + " tours !");
     }
 };
+
 $(document).ready(function () {
     $('#start').on("click", start);
 });
