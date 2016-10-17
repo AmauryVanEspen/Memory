@@ -106,7 +106,7 @@ var clickElem = function (event) {
 
     var fini = true;
     $('.div').each(function () {
-        if ($(this).css("background-color") == "transparent" || $(this).css("background-color") == "rgb(240, 240, 240)") {
+        if ($(this).css("background-color") == "rgb(240, 240, 240)") {
             fini = false;
         }
     });
